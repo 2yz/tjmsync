@@ -1,0 +1,19 @@
+[[job]]
+name = "hello-world"
+command = "sleep 10"
+interval = "60s"
+env = ["TEST=TEST"]
+
+[[job]]
+name = "hello-world"
+command = "sleep 10"
+env = ["TEST=TEST"]
+
+[job_log]
+type = "redis"
+redis_addr = "localhost:6379"
+redis_key = "logstash-job"
+
+[status_server]
+listen = ""
+port = "8080"

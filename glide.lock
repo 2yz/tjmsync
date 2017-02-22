@@ -1,0 +1,10 @@
+hash: 92e7e06489da34353158d3b1e4f834a014a524043f3443ec77329eb92bfb068c
+updated: 2017-02-21T22:19:47.607902165+08:00
+imports:
+- name: github.com/BurntSushi/toml
+  version: bbd5bb678321a0d6e58f1099321dfa73391c1b6f
+- name: github.com/frobware/go-wordexp
+  version: a9f9fa93526f53f436e895ab6ed0e709f54d2c40
+- name: gopkg.in/redis.v5
+  version: 135cb12c7689ffe92338baf677a1e0d2086144dc
+testImports: []

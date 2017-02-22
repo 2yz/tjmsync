@@ -1,0 +1,7 @@
+package: github.com/yezersky/tjmsync
+import:
+- package: github.com/BurntSushi/toml
+  version: ^0.2.0
+- package: github.com/frobware/go-wordexp
+- package: gopkg.in/redis.v5
+  version: ^5.2.5
