@@ -3,10 +3,10 @@ package main
 import (
 	"io/ioutil"
 	"log"
-	"github.com/yezersky/tjmsync"
 	"flag"
 	"fmt"
 	"os"
+	"github.com/yezersky/tjmsync/lib"
 )
 
 var conf_path string
@@ -14,9 +14,9 @@ var conf_path string
 func main() {
 	InitFlag()
 	Init()
-	worker := tjmsync.NewWorker(tjmsync.GetGlobalJobPool())
+	worker := lib.NewWorker(lib.GetGlobalJobPool())
 	worker.Start()
-	server := &tjmsync.StatusServer{}
+	server := &lib.StatusServer{}
 	server.Serve()
 }
 
@@ -34,11 +34,11 @@ func Init() {
 	if err1 != nil {
 		log.Fatal("Init err1: ", err1)
 	}
-	config, err2 := tjmsync.ParseConfig(data)
+	config, err2 := lib.ParseConfig(data)
 	if err2 != nil {
 		log.Fatal("Init err2: ", err2)
 	}
-	tjmsync.InitGlobalConfig(config)
-	tjmsync.InitGlobalJobPool(config.Jobs)
-	tjmsync.InitJobLogger()
+	lib.InitGlobalConfig(config)
+	lib.InitGlobalJobPool(config.Jobs)
+	lib.InitJobLogger()
 }

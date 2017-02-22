@@ -1,4 +1,4 @@
-package tjmsync
+package lib
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 )
 
 func TestParseConfig(t *testing.T) {
-	data, err1 := ioutil.ReadFile("example/config.toml")
+	data, err1 := ioutil.ReadFile("../example/config.toml")
 	if err1 != nil {
 		t.Error(err1)
 	}

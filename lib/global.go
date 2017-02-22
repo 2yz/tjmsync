@@ -1,4 +1,4 @@
-package tjmsync
+package lib
 
 var global struct {
 	Config  Config

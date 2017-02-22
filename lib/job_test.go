@@ -1,4 +1,4 @@
-package tjmsync
+package lib
 
 import (
 	"gopkg.in/redis.v5"
