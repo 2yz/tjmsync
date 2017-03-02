@@ -10,7 +10,7 @@ type Job struct {
 	Name            string
 	Command         Command
 	Env             []string
-	Interval        duration
+	Interval        TimeDuration
 	Status          JOB_STATUS
 	LastStartedAt   time.Time
 	LastFinishedAt  time.Time
@@ -37,14 +37,18 @@ func (j *Job) IsIdle() bool {
 	return j.Status == JOB_STATUS_IDLE || j.Status == ""
 }
 
-type duration struct {
+type TimeDuration struct {
 	Duration time.Duration
 }
 
-func (d *duration) UnmarshalText(text []byte) error {
+func (d *TimeDuration) UnmarshalText(text []byte) error {
 	var err error
 	d.Duration, err = time.ParseDuration(string(text))
 	return err
+}
+
+func (d *TimeDuration) MarshalText() ([]byte, error) {
+	return []byte(d.Duration.String()), nil
 }
 
 type JobPool struct {
@@ -101,7 +105,7 @@ type JobResult struct {
 	Error      string
 	Stdout     string
 	Stderr     string
-	Duration   time.Duration
+	Duration   TimeDuration
 }
 
 func InitJobLogger() {

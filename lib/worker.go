@@ -98,7 +98,9 @@ func (w *Work) log() {
 		Error:      w.ErrStr,
 		Stdout:     w.Stdout.String(),
 		Stderr:     w.Stderr.String(),
-		Duration:   w.FinishedAt.Sub(w.StartedAt),
+		Duration:   TimeDuration{
+			Duration: w.FinishedAt.Sub(w.StartedAt),
+		},
 	}
 	data, err1 := json.Marshal(result)
 	if err1 != nil {

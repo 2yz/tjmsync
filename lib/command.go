@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/frobware/go-wordexp"
 	"os/exec"
+	"strings"
 )
 
 type Command struct {
@@ -22,6 +23,11 @@ func (c *Command) UnmarshalText(text []byte) error {
 	c.Path = argv[0]
 	c.Args = argv[1:]
 	return nil
+}
+
+func (c *Command) MarshalText() ([]byte, error) {
+	str := c.Path + " " + strings.Join(c.Args, " ")
+	return []byte(str), nil
 }
 
 func (c *Command) GetCmd() *exec.Cmd {
