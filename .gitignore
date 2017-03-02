@@ -1,5 +1,5 @@
 vendor/
 conf/
-bin/tjmsync
+out/
 .idea/
 .env
