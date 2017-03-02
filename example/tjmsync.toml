@@ -2,10 +2,9 @@
 name = "hello-world"
 command = "sleep 10"
 interval = "60s"
-env = ["TEST=TEST"]
 
 [[job]]
-name = "hello-world"
+name = "hello"
 command = "sleep 10"
 env = ["TEST=TEST"]
 

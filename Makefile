@@ -7,7 +7,10 @@ install_dependency:
 	glide install
 
 compile_with_docker: install_dependency 
-	docker run -v `pwd`:$(PACKAGE_PATH) --rm yezersky/golang-builder -o $(PACKAGE_PATH)/bin/$(BINARY_NAME) $(PACKAGE)
+	docker run -v `pwd`:$(PACKAGE_PATH) --rm golang:1.7 go build -o $(PACKAGE_PATH)/bin/$(BINARY_NAME) $(PACKAGE)
 
 build: compile_with_docker
 	docker build -t $(IMAGE_NAME_TAG) .
+
+clean:
+	rm bin/tjmsync
