@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+if [ $# -ne 2 ]; then
+	echo "usage: gitsync <repository> <directory>"
+	exit 1
+fi
+
+repository=$1
+directory=$2
+
+function repo_init() {
+	echo "==== INIT $directory START ===="
+	git clone --mirror $repository $directory
+	echo "==== INIT $directory DONE ===="
+}
+
+function repo_update() {
+	cd $directory
+	echo "==== SYNC $directory START ===="
+	timeout -s INT 3600 git remote update
+	git repack -a -b -d
+	echo "==== SYNC $directory DONE ===="
+}
+
+if [[ ! -d "$directory" ]]; then
+	repo_init
+fi
+repo_update
+
+exit $?
