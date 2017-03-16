@@ -1,4 +1,4 @@
-package lib
+package manager
 
 import (
 	"github.com/BurntSushi/toml"
@@ -16,9 +16,21 @@ func ParseConfig(data []byte) (*Config, error) {
 }
 
 type Config struct {
-	Jobs         []Job              `toml:"job"`
-	Log          ConfigLog          `toml:"job_log"`
-	StatusServer ConfigStatusServer `toml:"status_server"`
+	MaxWorkerNumber int                `toml:"max_worker_number"`
+	Jobs            []ConfigJob        `toml:"job"`
+	Log             ConfigLog          `toml:"job_log"`
+	StatusServer    ConfigStatusServer `toml:"status_server"`
+}
+
+type ConfigJob struct {
+	Host     string            `toml:"host"`
+	Version  string            `toml:"version"`
+	Image    string            `toml:"image"`
+	Name     string            `toml:"name"`
+	Command  Command           `toml:"command"`
+	Env      []string          `toml:"env"`
+	Volumes  []string          `toml:"volumes"`
+	Interval TimeDuration      `toml:"interval"`
 }
 
 type ConfigLog struct {

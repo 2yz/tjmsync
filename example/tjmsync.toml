@@ -1,12 +1,18 @@
+max_worker_number=2
+
 [[job]]
-name = "hello-world"
+version = "1.24"
+image = "alpine"
+name = "test1"
 command = "sleep 10"
 interval = "60s"
 
 [[job]]
-name = "hello"
-command = "sleep 10"
-env = ["TEST=TEST"]
+version = "1.24"
+image = "alpine"
+name = "test2"
+command = "echo hello world"
+interval = "60s"
 
 [job_log]
 type = "redis"

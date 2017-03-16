@@ -1,4 +1,4 @@
-package lib
+package manager
 
 import (
 	"encoding/json"
@@ -16,7 +16,8 @@ func (s *StatusServer) Serve() {
 }
 
 func (s *StatusServer) job(w http.ResponseWriter, r *http.Request) {
-	data, err := json.Marshal(GetGlobalJobPool())
+	m := global.Manager
+	data, err := json.Marshal(m.GetJobs())
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(err.Error()))

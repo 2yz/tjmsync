@@ -1,10 +1,79 @@
-hash: 92e7e06489da34353158d3b1e4f834a014a524043f3443ec77329eb92bfb068c
-updated: 2017-02-21T22:19:47.607902165+08:00
+hash: 6fdb6c43221224d87e712a207ad5f58ff3c485aace448036fad74b7af35ded42
+updated: 2017-03-15T19:16:41.250565589+08:00
 imports:
 - name: github.com/BurntSushi/toml
   version: bbd5bb678321a0d6e58f1099321dfa73391c1b6f
-- name: github.com/frobware/go-wordexp
-  version: a9f9fa93526f53f436e895ab6ed0e709f54d2c40
+- name: github.com/docker/distribution
+  version: 08b06dc023674763e7b36d404cf0c7664cee1f5e
+  subpackages:
+  - digestset
+  - reference
+- name: github.com/docker/docker
+  version: 092cba3727bb9b4a2f0e922cd6c0f93ea270e363
+  subpackages:
+  - api/types
+  - api/types/blkiodev
+  - api/types/container
+  - api/types/events
+  - api/types/filters
+  - api/types/mount
+  - api/types/network
+  - api/types/reference
+  - api/types/registry
+  - api/types/strslice
+  - api/types/swarm
+  - api/types/time
+  - api/types/versions
+  - api/types/volume
+  - client
+  - pkg/idtools
+  - pkg/random
+  - pkg/stringid
+  - pkg/system
+  - pkg/tlsconfig
+  - volume
+- name: github.com/docker/go-connections
+  version: 990a1a1a70b0da4c4cb70e117971a4f0babfbf1a
+  subpackages:
+  - nat
+  - sockets
+  - tlsconfig
+- name: github.com/docker/go-units
+  version: 0dadbb0345b35ec7ef35e228dabb8de89a65bf52
+- name: github.com/Microsoft/go-winio
+  version: fff283ad5116362ca252298cfc9b95828956d85d
+- name: github.com/opencontainers/go-digest
+  version: aa2ec055abd10d26d539eb630a92241b781ce4bc
+- name: github.com/opencontainers/runc
+  version: 291bf601105c97dc1aa631fdfb7fca63c947319b
+  subpackages:
+  - libcontainer/label
+  - libcontainer/selinux
+  - libcontainer/system
+  - libcontainer/user
+- name: github.com/pkg/errors
+  version: bfd5150e4e41705ded2129ec33379de1cb90b513
+- name: github.com/Sirupsen/logrus
+  version: 0208149b40d863d2c1a2f8fe5753096a9cf2cc8b
+- name: github.com/yezersky/grpool
+  version: da5a00fad2fb05c9e127eec05c691590886465e2
+- name: golang.org/x/net
+  version: d379faa25cbdc04d653984913a2ceb43b0bc46d7
+  subpackages:
+  - context
+  - context/ctxhttp
+  - proxy
+- name: golang.org/x/sys
+  version: e48874b42435b4347fc52bdee0424a52abc974d7
+  subpackages:
+  - unix
+  - windows
 - name: gopkg.in/redis.v5
-  version: 135cb12c7689ffe92338baf677a1e0d2086144dc
+  version: a16aeec10ff407b1e7be6dd35797ccf5426ef0f0
+  subpackages:
+  - internal
+  - internal/consistenthash
+  - internal/hashtag
+  - internal/pool
+  - internal/proto
 testImports: []

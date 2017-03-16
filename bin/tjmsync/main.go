@@ -1,44 +1,48 @@
 package main
 
 import (
-	"io/ioutil"
-	"log"
 	"flag"
-	"fmt"
-	"os"
-	"github.com/yezersky/tjmsync/lib"
+	"log"
+	"io/ioutil"
+	"github.com/yezersky/tjmsync/manager"
+	"github.com/yezersky/grpool"
 )
 
-var conf_path string
+var (
+	conf_path string = "/etc/tjmsync.toml"
+)
 
 func main() {
-	InitFlag()
-	Init()
-	worker := lib.NewWorker(lib.GetGlobalJobPool())
-	worker.Start()
-	server := &lib.StatusServer{}
+	flag.StringVar(&conf_path, "conf", "", "config file path. Default: /etc/tjmsync.toml")
+	flag.Parse()
+
+	config, err := LoadConfig()
+	if err != nil {
+		log.Fatal("LoadConfig Fatal Error:", err)
+	}
+	manager.SetGlobalConfig(config)
+	manager.SetJobLogger(config.Log)
+	wp, err := grpool.NewWorkerPool(config.MaxWorkerNumber)
+	if err != nil {
+		log.Fatal("NewWorkerPool Fatal Error:", err)
+	}
+	wp.Start()
+	manager.SetGlobalWorkerPool(wp)
+	m := manager.NewManager(config.Jobs, wp)
+	err = m.Start()
+	if err != nil {
+		log.Fatal("Manager Start Fatal Error:", err)
+	}
+	manager.SetGlobalManager(m)
+
+	server := &manager.StatusServer{}
 	server.Serve()
 }
 
-func InitFlag() {
-	flag.StringVar(&conf_path, "conf", "" , "config file path")
-	flag.Parse()
-	if conf_path == "" {
-		fmt.Println("require -conf param")
-		os.Exit(1)
+func LoadConfig() (*manager.Config, error) {
+	data, err := ioutil.ReadFile(conf_path)
+	if err != nil {
+		return nil, err
 	}
-}
-
-func Init() {
-	data, err1 := ioutil.ReadFile(conf_path)
-	if err1 != nil {
-		log.Fatal("Init err1: ", err1)
-	}
-	config, err2 := lib.ParseConfig(data)
-	if err2 != nil {
-		log.Fatal("Init err2: ", err2)
-	}
-	lib.InitGlobalConfig(config)
-	lib.InitGlobalJobPool(config.Jobs)
-	lib.InitJobLogger()
+	return manager.ParseConfig(data)
 }
